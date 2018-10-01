@@ -8,4 +8,6 @@
     <dimen name="space_xlarge">32dp</dimen>
     <dimen name="space_xxlarge">56dp</dimen>
     <dimen name="space_xxxlarge">72dp</dimen>
+    <dimen name="list_item_image_width">180dp</dimen>
+    <dimen name="list_item_image_height">256dp</dimen>
 </resources>

@@ -9,6 +9,12 @@ apply plugin: 'kotlin-kapt'
 def DEFAULT_API_BASE_URL = "\"https://www.nisnass.ae\""
 def NISNASS_API_BASE_URL = "\"https://www.nisnass.ae\""
 
+def DEFAULT_IMAGE_BASE_URL_FOR_LIST = "\"https://nis-prod.atgcdn.ae/small_light(p=listing2x,of=jpg,q=70)/pub/media/catalog/product\""
+def NISNASS_IMAGE_BASE_URL_FOR_LIST = "\"https://nis-prod.atgcdn.ae/small_light(p=listing2x,of=jpg,q=70)/pub/media/catalog/product\""
+
+def DEFAULT_IMAGE_BASE_URL_FOR_DETAIL = "\"https://nis-prod.atgcdn.ae/small_light(p=zoom,of=jpg,q=70)/pub/media/catalog/product\""
+def NISNASS_IMAGE_BASE_URL_FOR_DETAIL = "\"https://nis-prod.atgcdn.ae/small_light(p=zoom,of=jpg,q=70)/pub/media/catalog/product\""
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -18,6 +24,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
 
     flavorDimensions "default"
@@ -28,12 +35,16 @@ android {
             dimension "default"
             applicationIdSuffix ".dev"
             buildConfigField "String", "API_BASE_URL", DEFAULT_API_BASE_URL
+            buildConfigField "String", "IMAGE_BASE_URL_FOR_LIST", DEFAULT_IMAGE_BASE_URL_FOR_LIST
+            buildConfigField "String", "IMAGE_BASE_URL_FOR_DETAIL", DEFAULT_IMAGE_BASE_URL_FOR_DETAIL
         }
 
         prodNisnass  {
             dimension "default"
             applicationIdSuffix ".nisnass"
             buildConfigField "String", "API_BASE_URL", NISNASS_API_BASE_URL
+            buildConfigField "String", "IMAGE_BASE_URL_FOR_LIST", NISNASS_IMAGE_BASE_URL_FOR_LIST
+            buildConfigField "String", "IMAGE_BASE_URL_FOR_DETAIL", NISNASS_IMAGE_BASE_URL_FOR_DETAIL
         }
 
         // more product flavors can be added here for multibrand support
@@ -78,4 +89,6 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.2"
     implementation "io.reactivex.rxjava2:rxandroid:2.1.0"
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
+
+    implementation "com.squareup.picasso:picasso:2.71828"
 }

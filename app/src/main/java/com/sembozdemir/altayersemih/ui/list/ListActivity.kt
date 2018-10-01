@@ -2,6 +2,7 @@ package com.sembozdemir.altayersemih.ui.list
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.Toast
 import com.sembozdemir.altayersemih.R
@@ -34,6 +35,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
         with(listRecyclerView) {
             layoutManager = GridLayoutManager(this@ListActivity, SPAN_COUNT)
+            setHasFixedSize(true)
             adapter = recyclerAdapter
         }
 

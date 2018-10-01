@@ -9,6 +9,7 @@ import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.setOnEndlessScrollListener
 import com.sembozdemir.altayersemih.network.model.Hit
+import com.sembozdemir.altayersemih.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
@@ -38,8 +39,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         }
 
         recyclerAdapter.onItemClick {
-            // TODO: start detail activity
-            Toast.makeText(this@ListActivity, "${it.name}", Toast.LENGTH_LONG).show()
+            startActivity(DetailActivity.newIntent(this@ListActivity, it.sku.orEmpty()))
         }
 
         with(listRecyclerView) {

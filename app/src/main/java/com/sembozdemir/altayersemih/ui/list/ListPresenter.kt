@@ -11,7 +11,10 @@ class ListPresenter(private val listRepository: ListRepository) : BasePresenter<
         listRepository.fetchList()
                 .subscribeBy(
                         onSuccess = { listResponse ->
-                            Timber.d(listResponse.categoryName)
+                            ifViewAttached {
+                                it.showCategoryName(listResponse.categoryName.orEmpty())
+                                it.populateList(listResponse.hits)
+                            }
                         },
                         onError = { Timber.e(it) }
                 )

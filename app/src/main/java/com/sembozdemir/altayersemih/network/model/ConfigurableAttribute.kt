@@ -8,5 +8,5 @@ data class ConfigurableAttribute(
         val code: String? = null,
 
         @Json(name = "options")
-        val options: List<OptionsItem?>? = null
+        val options: List<OptionsItem>? = null
 )

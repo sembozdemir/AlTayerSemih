@@ -21,6 +21,16 @@ class RecyclerAdapter(
         viewHolder.bind(items[position])
     }
 
+    fun updateItems(newItems: List<Hit>) {
+        val oldItems = items.toList()
+        items.clear()
+        items.addAll(newItems)
+
+        autoNotify(oldItems, items) { old, new ->
+            old.productId == new.productId
+        }
+    }
+
     fun addItems(newItems: List<Hit>) {
         val oldItems = items.toList()
         items.addAll(newItems)

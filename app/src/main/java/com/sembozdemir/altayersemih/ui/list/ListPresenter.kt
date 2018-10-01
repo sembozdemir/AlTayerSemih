@@ -13,6 +13,19 @@ class ListPresenter(private val listRepository: ListRepository) : BasePresenter<
                         onSuccess = { listResponse ->
                             ifViewAttached {
                                 it.showCategoryName(listResponse.categoryName.orEmpty())
+                                it.addMoreItems(listResponse.hits)
+                            }
+                        },
+                        onError = { Timber.e(it) }
+                )
+    }
+
+    fun refreshList() {
+        listRepository.fetchList()
+                .subscribeBy(
+                        onSuccess = { listResponse ->
+                            ifViewAttached {
+                                it.showCategoryName(listResponse.categoryName.orEmpty())
                                 it.populateList(listResponse.hits)
                             }
                         },

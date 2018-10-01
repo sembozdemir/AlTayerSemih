@@ -30,7 +30,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         super.onCreate(savedInstanceState)
 
         listSwipeRefreshLayout.setOnRefreshListener {
-            presenter.fetchList()
+            presenter.refreshList()
         }
 
         with(listRecyclerView) {
@@ -57,6 +57,10 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     }
 
     override fun populateList(hits: List<Hit>?) {
+        recyclerAdapter.updateItems(hits.orEmpty())
+    }
+
+    override fun addMoreItems(hits: List<Hit>?) {
         recyclerAdapter.addItems(hits.orEmpty())
     }
 }

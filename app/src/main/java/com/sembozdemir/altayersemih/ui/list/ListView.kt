@@ -7,4 +7,5 @@ interface ListView : BaseView {
 
     fun showCategoryName(categoryName: String)
     fun populateList(hits: List<Hit>?)
+    fun addMoreItems(hits: List<Hit>?)
 }

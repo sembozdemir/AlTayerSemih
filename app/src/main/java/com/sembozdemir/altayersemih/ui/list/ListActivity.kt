@@ -7,6 +7,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager
 import android.widget.Toast
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
+import com.sembozdemir.altayersemih.extensions.setOnEndlessScrollListener
 import com.sembozdemir.altayersemih.network.model.Hit
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
@@ -19,6 +20,9 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
     @Inject
     lateinit var listPresenter: ListPresenter
+
+    @Inject
+    lateinit var paginator: Paginator
 
     private val recyclerAdapter = RecyclerAdapter(mutableListOf())
 
@@ -34,9 +38,16 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         }
 
         with(listRecyclerView) {
-            layoutManager = GridLayoutManager(this@ListActivity, SPAN_COUNT)
+            val gridLayoutManager = GridLayoutManager(this@ListActivity, SPAN_COUNT)
+            layoutManager = gridLayoutManager
             setHasFixedSize(true)
             adapter = recyclerAdapter
+            setOnEndlessScrollListener(gridLayoutManager) {
+                if (paginator.hasNextPage()) {
+                    showLoading()
+                    presenter.fetchList(paginator.getNextPage())
+                }
+            }
         }
 
         showLoading()
@@ -62,5 +73,9 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
     override fun addMoreItems(hits: List<Hit>?) {
         recyclerAdapter.addItems(hits.orEmpty())
+    }
+
+    override fun setTotalPages(totalPages: Int) {
+        paginator.setTotalPages(totalPages)
     }
 }

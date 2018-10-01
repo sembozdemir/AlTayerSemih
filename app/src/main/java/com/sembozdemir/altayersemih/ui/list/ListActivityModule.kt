@@ -15,5 +15,8 @@ class ListActivityModule {
     }
 
     @Provides
+    fun providePaginator(): Paginator = PaginatorImpl()
+
+    @Provides
     fun provideListPresenter(listRepository: ListRepository) = ListPresenter(listRepository)
 }

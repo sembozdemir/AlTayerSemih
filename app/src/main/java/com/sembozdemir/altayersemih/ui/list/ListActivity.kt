@@ -19,5 +19,7 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
         super.onCreate(savedInstanceState)
 
         Toast.makeText(this, "Hello world!", Toast.LENGTH_LONG).show()
+
+        presenter.fetchList()
     }
 }

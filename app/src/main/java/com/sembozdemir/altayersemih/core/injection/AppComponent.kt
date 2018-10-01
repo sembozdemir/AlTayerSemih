@@ -1,6 +1,7 @@
 package com.sembozdemir.altayersemih.core.injection
 
 import com.sembozdemir.altayersemih.App
+import com.sembozdemir.altayersemih.network.NetworkModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjector
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
     AppModule::class,
-    ActivityBuilderModule::class
+    ActivityBuilderModule::class,
+    NetworkModule::class
 ])
 interface AppComponent : AndroidInjector<App> {
 

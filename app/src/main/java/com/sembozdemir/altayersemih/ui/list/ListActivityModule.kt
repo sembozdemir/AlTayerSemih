@@ -1,5 +1,8 @@
 package com.sembozdemir.altayersemih.ui.list
 
+import com.sembozdemir.altayersemih.network.ApiService
+import com.sembozdemir.altayersemih.network.list.ListRepository
+import com.sembozdemir.altayersemih.network.list.ListRepositoryImpl
 import dagger.Module
 import dagger.Provides
 
@@ -7,5 +10,10 @@ import dagger.Provides
 class ListActivityModule {
 
     @Provides
-    fun provideListPresenter() = ListPresenter()
+    fun provideListRepository(apiService: ApiService): ListRepository {
+        return ListRepositoryImpl(apiService)
+    }
+
+    @Provides
+    fun provideListPresenter(listRepository: ListRepository) = ListPresenter(listRepository)
 }

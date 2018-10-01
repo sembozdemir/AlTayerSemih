@@ -11,14 +11,24 @@ class RecyclerAdapter(
         val items: MutableList<Hit> = mutableListOf()
 ): RecyclerView.Adapter<ItemViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ItemViewHolder(
-            parent.inflate(R.layout.layout_item)
-    )
+    private var onItemClickFunc: (hit: Hit) -> Unit = {}
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(parent.inflate(R.layout.layout_item)).apply {
+            itemView.setOnClickListener {
+                onItemClickFunc(items[adapterPosition])
+            }
+        }
+    }
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         viewHolder.bind(items[position])
+    }
+
+    fun onItemClick(func: (hit: Hit) -> Unit) {
+        onItemClickFunc = func
     }
 
     fun updateItems(newItems: List<Hit>) {

@@ -37,6 +37,11 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
             presenter.refreshList()
         }
 
+        recyclerAdapter.onItemClick {
+            // TODO: start detail activity
+            Toast.makeText(this@ListActivity, "${it.name}", Toast.LENGTH_LONG).show()
+        }
+
         with(listRecyclerView) {
             val gridLayoutManager = GridLayoutManager(this@ListActivity, SPAN_COUNT)
             layoutManager = gridLayoutManager

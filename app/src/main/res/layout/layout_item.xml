@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/space_small">
@@ -13,22 +13,36 @@
         <ImageView
             android:id="@+id/itemImageView"
             android:layout_width="@dimen/list_item_image_width"
-            android:layout_height="@dimen/list_item_image_height"/>
+            android:layout_height="@dimen/list_item_image_height" />
 
         <TextView
             android:id="@+id/itemTextViewDesignerName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/space_medium"
+            android:paddingEnd="@dimen/space_medium"
+            android:textAppearance="@style/TextStyle.18.Bold"
+            tools:text="Nike" />
 
         <TextView
             android:id="@+id/itemTextViewName"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/space_medium"
+            android:paddingEnd="@dimen/space_medium"
+            android:textAppearance="@style/TextStyle.14"
+            tools:text="Just do it T-shirt" />
 
         <TextView
             android:id="@+id/itemTextViewPrice"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_medium"
+            android:layout_marginBottom="@dimen/space_medium"
+            android:paddingStart="@dimen/space_medium"
+            android:paddingEnd="@dimen/space_medium"
+            android:textAppearance="@style/TextStyle.18.Bold"
+            tools:text="299 USD" />
 
     </LinearLayout>
 

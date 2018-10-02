@@ -15,3 +15,7 @@ fun ImageView.setImageUrl(url: String, init: (RequestCreator.() -> RequestCreato
     if (init != null) requestCreator.init()
     requestCreator.into(this)
 }
+
+fun View.setVisible(visible: Boolean, falseVisibility: Int = View.GONE) {
+    visibility = if (visible) View.VISIBLE else falseVisibility
+}

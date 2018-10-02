@@ -20,6 +20,6 @@ data class ListResponse(
         val pagination: Pagination? = null,
 
         @Json(name = "hits")
-        val hits: List<Hit>? = null
+        val hits: List<Hit> = emptyList()
 
 ) : Parcelable

@@ -32,9 +32,9 @@ data class Product(
         val thumbnail: String? = null,
 
         @Json(name = "media")
-        val media: List<Media>? = null,
+        val media: List<Media> = listOf(),
 
         @Json(name = "configurableAttributes")
-        val configurableAttributes: List<ConfigurableAttribute>? = null
+        val configurableAttributes: List<ConfigurableAttribute> = emptyList()
 
 ) : Parcelable

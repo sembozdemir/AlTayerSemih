@@ -11,7 +11,7 @@ data class OptionsItem(
         val attributeSpecificProperties: AttributeSpecificProperties? = null,
 
         @Json(name = "simpleProductSkus")
-        val simpleProductSkus: List<String>? = null,
+        val simpleProductSkus: List<String> = emptyList(),
 
         @Json(name = "optionId")
         val optionId: Int? = null,

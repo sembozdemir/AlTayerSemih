@@ -51,7 +51,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
         detailTextViewPrice.text = product.price.toString()
 
         detailButtonBottomSheetExpand.setOnClickListener {
-            val addToBagDialogFragment = AddToBagDialogFragment()
+            val addToBagDialogFragment = AddToBagDialogFragment.newInstance(product)
             addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.tag)
         }
 

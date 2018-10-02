@@ -38,6 +38,9 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
     }
 
     override fun showProduct(product: Product) {
+
+        enableHomeAsUp(detailToolbar)
+
         detailToolbar.title = product.name
 
         detailTextViewDescription.text = product.name

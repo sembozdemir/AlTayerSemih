@@ -91,4 +91,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxkotlin:2.2.0"
 
     implementation "com.squareup.picasso:picasso:2.71828"
+
+    implementation "com.github.chrisbanes:PhotoView:2.1.4"
+
+    implementation 'me.relex:circleindicator:1.2.2@aar'
+
 }

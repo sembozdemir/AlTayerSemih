@@ -10,5 +10,5 @@
     <dimen name="space_xxxlarge">72dp</dimen>
     <dimen name="list_item_image_width">180dp</dimen>
     <dimen name="list_item_image_height">256dp</dimen>
-    <dimen name="detail_toolbar_image_height">296dp</dimen>
+    <dimen name="detail_toolbar_image_height">420dp</dimen>
 </resources>

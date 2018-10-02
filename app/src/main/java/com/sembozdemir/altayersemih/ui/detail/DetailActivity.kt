@@ -5,7 +5,9 @@ import android.content.Intent
 import android.os.Bundle
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
+import com.sembozdemir.altayersemih.network.model.Media
 import com.sembozdemir.altayersemih.network.model.Product
+import com.sembozdemir.altayersemih.ui.photo.PhotoPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
@@ -40,6 +42,15 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
 
         detailTextViewDescription.text = product.name
 
-        // TODO: populate image slider and other views
+        setupPhotoViewPager(product.media)
+
+    }
+
+    private fun setupPhotoViewPager(media: List<Media>?) {
+        val imageUrls = media?.mapNotNull { it.src }
+        detailViewPagerPhotos.adapter = PhotoPagerAdapter(supportFragmentManager,
+                imageUrls, zoomEnabled = false)
+
+        detailCircleIndicatorPhotos.setViewPager(detailViewPagerPhotos)
     }
 }

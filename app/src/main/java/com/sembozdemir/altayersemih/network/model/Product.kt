@@ -1,7 +1,10 @@
 package com.sembozdemir.altayersemih.network.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Product(
 
         @Json(name = "productId")
@@ -34,5 +37,4 @@ data class Product(
         @Json(name = "configurableAttributes")
         val configurableAttributes: List<ConfigurableAttribute>? = null
 
-
-)
+) : Parcelable

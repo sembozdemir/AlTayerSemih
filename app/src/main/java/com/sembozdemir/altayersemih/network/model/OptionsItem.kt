@@ -1,7 +1,10 @@
 package com.sembozdemir.altayersemih.network.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class OptionsItem(
 
         @Json(name = "attributeSpecificProperties")
@@ -18,4 +21,5 @@ data class OptionsItem(
 
         @Json(name = "isInStock")
         val isInStock: Boolean? = null
-)
+
+) : Parcelable

@@ -1,7 +1,10 @@
 package com.sembozdemir.altayersemih.network.model
 
+import android.os.Parcelable
 import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Hit(
 
         @Json(name = "productId")
@@ -28,4 +31,4 @@ data class Hit(
         @Json(name = "thumbnail")
         val thumbnail: String? = null
 
-)
+) : Parcelable

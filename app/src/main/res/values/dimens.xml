@@ -11,4 +11,5 @@
     <dimen name="list_item_image_width">180dp</dimen>
     <dimen name="list_item_image_height">256dp</dimen>
     <dimen name="detail_toolbar_image_height">420dp</dimen>
+    <dimen name="detail_bottom_space_height">96dp</dimen>
 </resources>

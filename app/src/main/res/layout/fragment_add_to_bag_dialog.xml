@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/detailRecyclerViewConfigs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/space_large"
+        android:gravity="center"
+        android:textAppearance="@style/TextStyle.56.Bold"
+        android:text="TODO: ADD CONFIGS (COLOR, SIZE)"/>
+    <!-- TODO: ADD CONFIGS (COLOR, SIZE) -->
+
+    <Button
+        android:id="@+id/addToBagButton"
+        style="@style/BlackButton"
+        android:layout_margin="@dimen/space_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_bag"/>
+
+</LinearLayout>

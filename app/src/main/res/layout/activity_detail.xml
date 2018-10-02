@@ -32,7 +32,7 @@
                 android:id="@+id/detailCircleIndicatorPhotos"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_gravity="bottom|center_horizontal"/>
+                android:layout_gravity="bottom|center_horizontal" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/detailToolbar"
@@ -58,16 +58,47 @@
             android:padding="@dimen/space_default">
 
             <TextView
-                android:id="@+id/detailTextViewDescription"
+                android:id="@+id/detailTextViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextStyle.20"
                 tools:text="Nike just do it T-shirt description" />
 
+            <TextView
+                android:id="@+id/detailTextViewDesigner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:textAppearance="@style/TextStyle.14.Bold"
+                tools:text="NIKE" />
+
+            <TextView
+                android:id="@+id/detailTextViewPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_medium"
+                android:textAppearance="@style/TextStyle.16.Bold"
+                tools:text="$239" />
+
+            <include layout="@layout/layout_divider" />
+
             <!-- TODO: add more information -->
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/detail_bottom_space_height"/>
 
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+    <Button
+        android:id="@+id/detailButtonBottomSheetExpand"
+        style="@style/BlackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/space_default"
+        android:text="@string/add_to_bag" />
 
 </android.support.design.widget.CoordinatorLayout>

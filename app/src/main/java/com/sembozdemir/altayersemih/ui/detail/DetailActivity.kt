@@ -7,6 +7,7 @@ import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.network.model.Media
 import com.sembozdemir.altayersemih.network.model.Product
+import com.sembozdemir.altayersemih.ui.detail.addtobag.AddToBagDialogFragment
 import com.sembozdemir.altayersemih.ui.photo.PhotoPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
@@ -43,7 +44,16 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
 
         detailToolbar.title = product.name
 
-        detailTextViewDescription.text = product.name
+        detailTextViewName.text = product.name
+
+        detailTextViewDesigner.text = product.designerCategoryName
+
+        detailTextViewPrice.text = product.price.toString()
+
+        detailButtonBottomSheetExpand.setOnClickListener {
+            val addToBagDialogFragment = AddToBagDialogFragment()
+            addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.tag)
+        }
 
         setupPhotoViewPager(product.media)
 

@@ -82,7 +82,63 @@
 
             <include layout="@layout/layout_divider" />
 
-            <!-- TODO: add more information -->
+            <LinearLayout
+                android:id="@+id/detailLinearLayoutColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_medium"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextStyle.14"
+                        android:textColor="@color/gray"
+                        android:text="@string/product_config_title_color"/>
+
+                    <TextView
+                        android:id="@+id/detailTextViewColor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_small"
+                        android:textAppearance="@style/TextStyle.16.Bold"
+                        tools:text="Blue" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/detailLinearLayoutSize"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextStyle.14"
+                        android:textColor="@color/gray"
+                        android:text="@string/product_config_title_size"/>
+
+                    <TextView
+                        android:id="@+id/detailTextViewSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/space_small"
+                        android:textAppearance="@style/TextStyle.16.Bold"
+                        tools:text="XS" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <include layout="@layout/layout_divider" />
 
             <View
                 android:layout_width="match_parent"

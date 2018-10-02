@@ -10,9 +10,10 @@ class ConfigOptionsRecyclerAdapter(
         private val productConfigItem: ProductConfigItem
 ) : RecyclerView.Adapter<ConfigOptionViewHolder>() {
 
-    private var selectedPos = RecyclerView.NO_POSITION
+    private var selectedPos = INVALID_POSITION
 
     companion object {
+        const val INVALID_POSITION = -1
         const val COLOR_VIEW_TYPE = 0
         const val SIZE_VIEW_TYPE = 1
     }
@@ -24,12 +25,14 @@ class ConfigOptionsRecyclerAdapter(
             else -> throw IllegalStateException("Option could not found with view type $viewType")
         }.apply {
             itemView.setOnClickListener {
-                handleOnClick(adapterPosition)
+                selectItem(adapterPosition)
             }
         }
     }
 
-    private fun handleOnClick(position: Int) {
+    fun selectItem(position: Int) {
+        if (position == INVALID_POSITION) return
+
         notifyItemChanged(selectedPos)
         selectedPos = position
         notifyItemChanged(selectedPos)

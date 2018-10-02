@@ -41,7 +41,8 @@ class AddToBagDialogFragment : BottomSheetDialogFragment() {
             adapter = ProductConfigsRecyclerAdapter(
                     product?.configurableAttributes?.mapNotNull { configurableAttribute ->
                         configurableAttribute.code?.let { code ->
-                            ProductConfigItem(code, configurableAttribute.options)
+                            ProductConfigItem(code, product?.color.orEmpty(),
+                                    configurableAttribute.options)
                         }
                     }.orEmpty()
             )

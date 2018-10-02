@@ -21,7 +21,14 @@ class ProductConfigItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
 
             productConfigRecyclerView.setHasFixedSize(true)
 
-            productConfigRecyclerView.adapter = ConfigOptionsRecyclerAdapter(item)
+            val configOptionsRecyclerAdapter = ConfigOptionsRecyclerAdapter(item)
+            productConfigRecyclerView.adapter = configOptionsRecyclerAdapter
+
+            val selectedPos = item.optionsItem.indexOfFirst {
+                it.label == item.color
+            }
+
+            configOptionsRecyclerAdapter.selectItem(selectedPos)
 
         }
     }

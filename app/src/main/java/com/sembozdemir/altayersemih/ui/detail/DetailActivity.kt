@@ -51,12 +51,28 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
         detailTextViewPrice.text = product.price.toString()
 
         detailButtonBottomSheetExpand.setOnClickListener {
-            val addToBagDialogFragment = AddToBagDialogFragment.newInstance(product)
-            addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.tag)
+            handleAddToBagClick(product)
+        }
+
+        detailTextViewColor.text = product.color
+
+        detailLinearLayoutColor.setOnClickListener {
+            handleAddToBagClick(product)
+        }
+
+        detailTextViewSize.text = product.sizeCode
+
+        detailLinearLayoutSize.setOnClickListener {
+            handleAddToBagClick(product)
         }
 
         setupPhotoViewPager(product.media)
 
+    }
+
+    private fun handleAddToBagClick(product: Product) {
+        val addToBagDialogFragment = AddToBagDialogFragment.newInstance(product)
+        addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.tag)
     }
 
     private fun setupPhotoViewPager(media: List<Media>?) {

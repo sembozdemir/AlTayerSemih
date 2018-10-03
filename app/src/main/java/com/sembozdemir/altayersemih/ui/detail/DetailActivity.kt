@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.widget.Toast
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.*
@@ -137,6 +138,11 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
                 imageUrls, zoomEnabled = false)
 
         detailCircleIndicatorPhotos.setViewPager(detailViewPagerPhotos)
+
+        detailViewPagerPhotos.setOnClickListener {
+            Toast.makeText(this@DetailActivity, "viewpager is clicked", Toast.LENGTH_LONG).show()
+            // todo: show photos on fullscreen pager
+        }
     }
 
     override fun onOptionItemSelected(productConfigItem: ProductConfigItem, optionsItem: OptionsItem) {

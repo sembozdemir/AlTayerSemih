@@ -7,28 +7,28 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Hit(
 
-        @Json(name = "productId")
+        @field:Json(name = "productId")
         val productId: Long? = null,
 
-        @Json(name = "sku")
+        @field:Json(name = "sku")
         val sku: String? = null,
 
-        @Json(name = "name")
+        @field:Json(name = "name")
         val name: String? = null,
 
-        @Json(name = "designerCategoryName")
+        @field:Json(name = "designerCategoryName")
         val designerCategoryName: String? = null,
 
-        @Json(name = "slug")
+        @field:Json(name = "slug")
         val slug: String? = null,
 
-        @Json(name = "price")
+        @field:Json(name = "price")
         val price: Double? = null,
 
-        @Json(name = "image")
+        @field:Json(name = "image")
         val image: String? = null,
 
-        @Json(name = "thumbnail")
+        @field:Json(name = "thumbnail")
         val thumbnail: String? = null
 
 ) : Parcelable

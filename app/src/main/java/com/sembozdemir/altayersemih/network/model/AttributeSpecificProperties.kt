@@ -7,13 +7,13 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class AttributeSpecificProperties(
 
-        @Json(name = "swatchImage")
+        @field:Json(name = "swatchImage")
         val swatchImage: String? = null,
 
-        @Json(name = "productThumbnail")
+        @field:Json(name = "productThumbnail")
         val productThumbnail: String? = null,
 
-        @Json(name = "hex")
+        @field:Json(name = "hex")
         val hex: String? = null
 
 ) : Parcelable

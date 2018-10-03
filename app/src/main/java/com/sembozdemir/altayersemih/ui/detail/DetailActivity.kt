@@ -2,18 +2,23 @@ package com.sembozdemir.altayersemih.ui.detail
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.findFragment
 import com.sembozdemir.altayersemih.extensions.fragmentTag
 import com.sembozdemir.altayersemih.extensions.setHtml
+import com.sembozdemir.altayersemih.extensions.setImageUrl
 import com.sembozdemir.altayersemih.network.model.Media
 import com.sembozdemir.altayersemih.network.model.OptionsItem
 import com.sembozdemir.altayersemih.network.model.Product
 import com.sembozdemir.altayersemih.ui.detail.addtobag.AddToBagDialogFragment
 import com.sembozdemir.altayersemih.ui.detail.addtobag.ProductConfigItem
 import com.sembozdemir.altayersemih.ui.photo.PhotoPagerAdapter
+import com.sembozdemir.altayersemih.util.ColorMapper
+import com.sembozdemir.altayersemih.util.ImageUrl
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
@@ -31,6 +36,9 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
     @Inject
     lateinit var detailPresenter: DetailPresenter
+
+    @Inject
+    lateinit var colorMapper: ColorMapper
 
     private val sku by lazy { intent.getStringExtra(EXTRA_SKU).orEmpty() }
 
@@ -63,6 +71,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         }
 
         detailTextViewColor.text = product.color
+        setupColorDrawable(product)
 
         setupSizeSelection(product, selectedSizeLabel)
 
@@ -81,6 +90,29 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
             it.setProduct(product, selectedSizeLabel)
         }
 
+    }
+
+    private fun setupColorDrawable(product: Product) {
+
+        if (colorMapper.hasHex(product.color.orEmpty())) {
+            val colorHex = colorMapper.getHex(product.color.orEmpty()) ?: "#FFFFFF"
+            detailImageViewColorCircle.setImageDrawable(ColorDrawable(Color.parseColor(colorHex)))
+        } else if (colorMapper.hasImage(product.color.orEmpty())) {
+            val image = colorMapper.getImage(product.color.orEmpty()).orEmpty()
+            // FIXME: multicolour images could not be loaded perfectly, because base image url does not work here
+            detailImageViewColorCircle.setImageUrl(ImageUrl.forDetail(image)) {
+                noFade()
+            }
+        } else {
+            val optionsItemColor = product.configurableAttributes
+                    .find { it.code == ProductConfigItem.COLOR }
+            val colorHex = optionsItemColor?.options
+                    ?.find { it.label == product.color }
+                    ?.attributeSpecificProperties
+                    ?.hex
+                    ?: "#FFFFFF"
+            detailImageViewColorCircle.setImageDrawable(ColorDrawable(Color.parseColor(colorHex)))
+        }
     }
 
     private fun setupSizeSelection(product: Product, selectedSizeLabel: String?) {

@@ -7,10 +7,10 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Pagination(
 
-        @Json(name = "totalHits")
+        @field:Json(name = "totalHits")
         val totalHits: Int? = null,
 
-        @Json(name = "totalPages")
+        @field:Json(name = "totalPages")
         val totalPages: Int? = null
 
 ) : Parcelable

@@ -7,16 +7,16 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Media(
 
-        @Json(name = "videoUrl")
+        @field:Json(name = "videoUrl")
         val videoUrl: String? = null,
 
-        @Json(name = "src")
+        @field:Json(name = "src")
         val src: String? = null,
 
-        @Json(name = "mediaType")
+        @field:Json(name = "mediaType")
         val mediaType: String? = null,
 
-        @Json(name = "position")
+        @field:Json(name = "position")
         val position: Int? = null
 
 ) : Parcelable

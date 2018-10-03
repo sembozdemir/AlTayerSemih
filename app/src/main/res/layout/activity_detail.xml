@@ -98,17 +98,34 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/product_config_title_color"
                         android:textAppearance="@style/TextStyle.14"
-                        android:textColor="@color/gray"
-                        android:text="@string/product_config_title_color"/>
+                        android:textColor="@color/gray" />
 
-                    <TextView
-                        android:id="@+id/detailTextViewColor"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_small"
-                        android:textAppearance="@style/TextStyle.16.Bold"
-                        tools:text="Blue" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/detailImageViewColorCircle"
+                            android:layout_width="@dimen/space_default"
+                            android:layout_height="@dimen/space_default"
+                            android:src="@android:color/transparent"
+                            app:civ_border_color="@color/black"
+                            app:civ_border_width="@dimen/space_tiny" />
+
+                        <TextView
+                            android:id="@+id/detailTextViewColor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/space_small"
+                            android:textAppearance="@style/TextStyle.16.Bold"
+                            tools:text="Blue" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -121,9 +138,9 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:text="@string/product_config_title_size"
                         android:textAppearance="@style/TextStyle.14"
-                        android:textColor="@color/gray"
-                        android:text="@string/product_config_title_size"/>
+                        android:textColor="@color/gray" />
 
                     <TextView
                         android:id="@+id/detailTextViewSize"
@@ -142,9 +159,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/detail_description_label"
                 android:textAppearance="@style/TextStyle.14"
-                android:textColor="@color/gray"
-                android:text="@string/detail_description_label"/>
+                android:textColor="@color/gray" />
 
             <TextView
                 android:id="@+id/detailTextViewDescription"
@@ -159,9 +176,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/detail_size_and_fit_label"
                 android:textAppearance="@style/TextStyle.14"
-                android:textColor="@color/gray"
-                android:text="@string/detail_size_and_fit_label"/>
+                android:textColor="@color/gray" />
 
             <TextView
                 android:id="@+id/detailTextViewSizeAndFit"
@@ -173,7 +190,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/detail_bottom_space_height"/>
+                android:layout_height="@dimen/detail_bottom_space_height" />
 
         </LinearLayout>
 

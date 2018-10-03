@@ -7,49 +7,49 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Product(
 
-        @Json(name = "productId")
+        @field:Json(name = "productId")
         val productId: Long? = null,
 
-        @Json(name = "sku")
+        @field:Json(name = "sku")
         val sku: String? = null,
 
-        @Json(name = "name")
+        @field:Json(name = "name")
         val name: String? = null,
 
-        @Json(name = "designerCategoryName")
+        @field:Json(name = "designerCategoryName")
         val designerCategoryName: String? = null,
 
-        @Json(name = "slug")
+        @field:Json(name = "slug")
         val slug: String? = null,
 
-        @Json(name = "price")
+        @field:Json(name = "price")
         val price: Double? = null,
 
-        @Json(name = "image")
+        @field:Json(name = "image")
         val image: String? = null,
 
-        @Json(name = "thumbnail")
+        @field:Json(name = "thumbnail")
         val thumbnail: String? = null,
 
-        @Json(name = "media")
+        @field:Json(name = "media")
         val media: List<Media> = listOf(),
 
-        @Json(name = "configurableAttributes")
+        @field:Json(name = "configurableAttributes")
         val configurableAttributes: List<ConfigurableAttribute> = emptyList(),
 
-        @Json(name = "color")
+        @field:Json(name = "color")
         val color: String? = null,
 
-        @Json(name = "sizeCode")
+        @field:Json(name = "sizeCode")
         val sizeCode: String? = null,
 
-        @Json(name = "description")
+        @field:Json(name = "description")
         val description: String? = null,
 
-        @Json(name = "sizeAndFit")
+        @field:Json(name = "sizeAndFit")
         val sizeAndFit: String? = null,
 
-        @Json(name = "sameColorSiblings")
+        @field:Json(name = "sameColorSiblings")
         val sameColorSiblings: List<String> = emptyList()
 
 ) : Parcelable

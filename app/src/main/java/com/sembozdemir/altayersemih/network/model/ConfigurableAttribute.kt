@@ -7,10 +7,10 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ConfigurableAttribute(
 
-        @Json(name = "code")
+        @field:Json(name = "code")
         val code: String? = null,
 
-        @Json(name = "options")
+        @field:Json(name = "options")
         val options: List<OptionsItem> = emptyList()
 
 ) : Parcelable

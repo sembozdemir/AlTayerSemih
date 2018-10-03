@@ -3,6 +3,7 @@ package com.sembozdemir.altayersemih.ui.list
 import com.sembozdemir.altayersemih.network.ApiService
 import com.sembozdemir.altayersemih.network.list.ListRepository
 import com.sembozdemir.altayersemih.network.list.ListRepositoryImpl
+import com.sembozdemir.altayersemih.util.ColorMapper
 import dagger.Module
 import dagger.Provides
 
@@ -18,5 +19,7 @@ class ListActivityModule {
     fun providePaginator(): Paginator = PaginatorImpl()
 
     @Provides
-    fun provideListPresenter(listRepository: ListRepository) = ListPresenter(listRepository)
+    fun provideListPresenter(
+            listRepository: ListRepository, colorMapper: ColorMapper
+    ) = ListPresenter(listRepository, colorMapper)
 }

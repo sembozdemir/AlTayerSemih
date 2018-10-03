@@ -7,19 +7,19 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class OptionsItem(
 
-        @Json(name = "attributeSpecificProperties")
+        @field:Json(name = "attributeSpecificProperties")
         val attributeSpecificProperties: AttributeSpecificProperties? = null,
 
-        @Json(name = "simpleProductSkus")
+        @field:Json(name = "simpleProductSkus")
         val simpleProductSkus: List<String> = emptyList(),
 
-        @Json(name = "optionId")
+        @field:Json(name = "optionId")
         val optionId: Int? = null,
 
-        @Json(name = "label")
+        @field:Json(name = "label")
         val label: String? = null,
 
-        @Json(name = "isInStock")
+        @field:Json(name = "isInStock")
         val isInStock: Boolean? = null
 
 ) : Parcelable

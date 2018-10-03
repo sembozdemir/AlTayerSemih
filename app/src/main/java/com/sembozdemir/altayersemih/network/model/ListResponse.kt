@@ -7,19 +7,22 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class ListResponse(
 
-        @Json(name = "page")
+        @field:Json(name = "facets")
+        val facets: Facets? = null,
+
+        @field:Json(name = "page")
         val page: Int? = null,
 
-        @Json(name = "categoryName")
+        @field:Json(name = "categoryName")
         val categoryName: String? = null,
 
-        @Json(name = "hitsPerPage")
+        @field:Json(name = "hitsPerPage")
         val hitsPerPage: String? = null,
 
-        @Json(name = "pagination")
+        @field:Json(name = "pagination")
         val pagination: Pagination? = null,
 
-        @Json(name = "hits")
+        @field:Json(name = "hits")
         val hits: List<Hit> = emptyList()
 
 ) : Parcelable

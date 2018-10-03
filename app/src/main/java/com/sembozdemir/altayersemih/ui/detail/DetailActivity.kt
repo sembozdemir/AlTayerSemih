@@ -7,10 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
-import com.sembozdemir.altayersemih.extensions.findFragment
-import com.sembozdemir.altayersemih.extensions.fragmentTag
-import com.sembozdemir.altayersemih.extensions.setHtml
-import com.sembozdemir.altayersemih.extensions.setImageUrl
+import com.sembozdemir.altayersemih.extensions.*
 import com.sembozdemir.altayersemih.network.model.Media
 import com.sembozdemir.altayersemih.network.model.OptionsItem
 import com.sembozdemir.altayersemih.network.model.Product
@@ -64,7 +61,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
         detailTextViewDesigner.text = product.designerCategoryName
 
-        detailTextViewPrice.text = product.price.toString()
+        detailTextViewPrice.text = product.price.asFormattedAmount()
 
         detailButtonBottomSheetExpand.setOnClickListener {
             handleAddToBagClick(product)

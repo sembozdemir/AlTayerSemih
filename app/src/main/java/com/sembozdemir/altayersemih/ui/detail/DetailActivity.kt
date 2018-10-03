@@ -119,11 +119,13 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         val optionsItemForSize = product.configurableAttributes
                 .find { it.code == ProductConfigItem.SIZE_CODE }
         val sizeLabelStringBuilder = StringBuilder()
+        sizeLabelStringBuilder.append(" · ")
         optionsItemForSize?.options?.forEach {
-            sizeLabelStringBuilder.append(it.label).append("   ")
+            sizeLabelStringBuilder.append(it.label).append(" · ")
         }
 
-        detailTextViewSize.text = SizeOptionSpannableCreator().getSizeOptionText(selectedSizeLabel,
+        detailTextViewSize.text = SizeOptionSpannableCreator().getSizeOptionText(
+                "· $selectedSizeLabel ·",
                 sizeLabelStringBuilder.toString())
     }
 

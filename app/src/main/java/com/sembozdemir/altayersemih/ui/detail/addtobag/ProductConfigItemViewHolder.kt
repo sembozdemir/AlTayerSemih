@@ -41,7 +41,7 @@ class ProductConfigItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
                     .indexOfFirst { it.label == item.color }
 
             if (selectedPos == -1) {
-                selectedPos = item.optionsItem.indexOfFirst { it.label == item.size }
+                selectedPos = item.optionsItem.indexOfFirst { it.label == item.selectedSizeLabel }
             }
 
             configOptionsRecyclerAdapter.selectItem(selectedPos)

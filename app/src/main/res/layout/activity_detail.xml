@@ -181,7 +181,7 @@
 
     <Button
         android:id="@+id/detailButtonBottomSheetExpand"
-        style="@style/BlackButton"
+        style="@style/ButtonStyle.Black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

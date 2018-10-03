@@ -47,6 +47,9 @@ data class Product(
         val description: String? = null,
 
         @Json(name = "sizeAndFit")
-        val sizeAndFit: String? = null
+        val sizeAndFit: String? = null,
+
+        @Json(name = "sameColorSiblings")
+        val sameColorSiblings: List<String> = emptyList()
 
 ) : Parcelable

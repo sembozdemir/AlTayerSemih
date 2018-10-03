@@ -16,21 +16,21 @@ class AddToBagDialogFragment : BottomSheetDialogFragment() {
 
     companion object {
 
-        const val DIALOG_TAG = "addToBagDialogFragment"
-
         private const val KEY_PRODUCT = "product"
+        private const val KEY_SELECTED_SIZE_LABEL = "selectedSizeLabel"
 
-        fun newInstance(product: Product): AddToBagDialogFragment {
+        fun newInstance(product: Product, selectedSizeLabel: String?): AddToBagDialogFragment {
             return AddToBagDialogFragment().apply {
                 arguments = Bundle().apply {
                     putParcelable(KEY_PRODUCT, product)
+                    putString(KEY_SELECTED_SIZE_LABEL, selectedSizeLabel)
                 }
             }
         }
     }
 
     interface OnOptionItemSelectedListener {
-        fun onOptionItemSelected(otherProductConfigItem: ProductConfigItem?, optionsItem: OptionsItem)
+        fun onOptionItemSelected(productConfigItem: ProductConfigItem, optionsItem: OptionsItem)
     }
 
     private var onOptionItemSelectedListener: OnOptionItemSelectedListener? = null
@@ -57,33 +57,40 @@ class AddToBagDialogFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val product = arguments?.getParcelable<Product>(KEY_PRODUCT)
-        setupRecyclerViewConfigs(product)
+        val selectedSizeLabel = arguments?.getString(KEY_SELECTED_SIZE_LABEL)
+
+        addToBagButton.isEnabled = !selectedSizeLabel.isNullOrEmpty()
+        setupRecyclerViewConfigs(product, selectedSizeLabel)
     }
 
-    private fun setupRecyclerViewConfigs(product: Product?) {
+    private fun setupRecyclerViewConfigs(product: Product?, selectedSizeLabel: String?) {
         with(addToBagRecyclerViewConfigs) {
             layoutManager = LinearLayoutManager(activity)
-            adapter = ProductConfigsRecyclerAdapter(createProductConfigItems(product)).apply {
-                onOptionSelected { otherProductConfigItem, optionsItem ->
-                    onOptionItemSelectedListener?.onOptionItemSelected(otherProductConfigItem,
+            adapter = ProductConfigsRecyclerAdapter(
+                    createProductConfigItems(product, selectedSizeLabel)
+            ).apply {
+                onOptionSelected { productConfigItem, optionsItem ->
+                    onOptionItemSelectedListener?.onOptionItemSelected(productConfigItem,
                             optionsItem)
                 }
             }
         }
     }
 
-    private fun createProductConfigItems(product: Product?): List<ProductConfigItem> {
+    private fun createProductConfigItems(product: Product?, selectedSizeLabel: String?): List<ProductConfigItem> {
         return product?.configurableAttributes?.mapNotNull { configurableAttribute ->
             configurableAttribute.code?.let { code ->
                 ProductConfigItem(code,
                         product.color.orEmpty(),
-                        product.sizeCode.orEmpty(),
+                        selectedSizeLabel,
+                        product.sameColorSiblings,
                         configurableAttribute.options)
             }
         }.orEmpty()
     }
 
-    fun setProduct(product: Product) {
-        setupRecyclerViewConfigs(product)
+    fun setProduct(product: Product, selectedSizeLabel: String?) {
+        addToBagButton.isEnabled = !selectedSizeLabel.isNullOrEmpty()
+        setupRecyclerViewConfigs(product, selectedSizeLabel)
     }
 }

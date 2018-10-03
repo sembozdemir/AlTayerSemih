@@ -34,6 +34,8 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
     private val sku by lazy { intent.getStringExtra(EXTRA_SKU).orEmpty() }
 
+    private var selectedSizeLabel: String? = null
+
     override fun createPresenter() = detailPresenter
 
     override fun getLayoutResId() = R.layout.activity_detail
@@ -76,13 +78,13 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
         val fragment = supportFragmentManager.findFragment<AddToBagDialogFragment>()
         fragment?.let {
-            it.setProduct(product)
+            it.setProduct(product, selectedSizeLabel)
         }
 
     }
 
     private fun handleAddToBagClick(product: Product) {
-        val addToBagDialogFragment = AddToBagDialogFragment.newInstance(product)
+        val addToBagDialogFragment = AddToBagDialogFragment.newInstance(product, selectedSizeLabel)
         addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.fragmentTag)
     }
 
@@ -94,32 +96,20 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         detailCircleIndicatorPhotos.setViewPager(detailViewPagerPhotos)
     }
 
-    override fun onOptionItemSelected(otherProductConfigItem: ProductConfigItem?, optionsItem: OptionsItem) {
+    override fun onOptionItemSelected(productConfigItem: ProductConfigItem, optionsItem: OptionsItem) {
 
-        if (otherProductConfigItem == null) {
-            val sku = optionsItem.simpleProductSkus.first()
-            presenter.loadProduct(sku)
-            return
-        }
-
-        when (otherProductConfigItem.type) {
+        when (productConfigItem.type) {
             ProductConfigItem.COLOR -> {
-                val position = otherProductConfigItem.optionsItem
-                        .indexOfFirst { detailTextViewColor.text == it.label }
-
-                if (position != -1) {
-                    val sku = optionsItem.simpleProductSkus[position]
-                    presenter.loadProduct(sku)
-                }
+                selectedSizeLabel = null
+                val sku = optionsItem.simpleProductSkus.first()
+                presenter.loadProduct(sku)
             }
             ProductConfigItem.SIZE_CODE -> {
-                val position = otherProductConfigItem.optionsItem
-                        .indexOfFirst { detailTextViewSize.text == it.label }
-
-                if (position != -1) {
-                    val sku = optionsItem.simpleProductSkus[position]
-                    presenter.loadProduct(sku)
-                }
+                selectedSizeLabel = optionsItem.label
+                val sku = productConfigItem.sameColorSiblings
+                        .intersect(optionsItem.simpleProductSkus)
+                        .first()
+                presenter.loadProduct(sku)
             }
         }
     }

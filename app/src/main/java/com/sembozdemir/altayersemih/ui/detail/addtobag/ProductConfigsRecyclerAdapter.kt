@@ -11,12 +11,12 @@ class ProductConfigsRecyclerAdapter(
 ) : RecyclerView.Adapter<ProductConfigItemViewHolder>() {
 
     private var onOptionSelectedFunc: (
-            otherProductConfigItem: ProductConfigItem?,
+            productConfigItem: ProductConfigItem,
             optionsItem: OptionsItem
     ) -> Unit = { _, _ -> }
 
     fun onOptionSelected(func: (
-            otherProductConfigItem: ProductConfigItem?,
+            productConfigItem: ProductConfigItem,
             optionsItem: OptionsItem
     ) -> Unit) {
         onOptionSelectedFunc = func
@@ -25,17 +25,7 @@ class ProductConfigsRecyclerAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductConfigItemViewHolder {
         return ProductConfigItemViewHolder(parent.inflate(R.layout.item_product_config)).apply {
             onOptionSelected { productConfigItem, optionsItem ->
-                if (items.size == 1) {
-                    onOptionSelectedFunc(null, optionsItem)
-                } else {
-                    val otherProductConfigItem = items.asSequence()
-                            .filterNot { it.type == productConfigItem.type }
-                            .first {
-                                it.type == ProductConfigItem.SIZE_CODE
-                                        || it.type == ProductConfigItem.COLOR
-                            }
-                    onOptionSelectedFunc(otherProductConfigItem, optionsItem)
-                }
+                onOptionSelectedFunc(productConfigItem, optionsItem)
             }
         }
     }

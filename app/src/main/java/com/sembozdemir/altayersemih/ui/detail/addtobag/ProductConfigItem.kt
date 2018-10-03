@@ -6,7 +6,8 @@ import com.sembozdemir.altayersemih.network.model.OptionsItem
 data class ProductConfigItem(
         val type: String,
         val color: String,
-        val size: String,
+        val selectedSizeLabel: String?,
+        val sameColorSiblings: List<String>,
         val optionsItem: List<OptionsItem>
 ) {
 

@@ -7,6 +7,7 @@ import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.findFragment
 import com.sembozdemir.altayersemih.extensions.fragmentTag
+import com.sembozdemir.altayersemih.extensions.setHtml
 import com.sembozdemir.altayersemih.network.model.Media
 import com.sembozdemir.altayersemih.network.model.OptionsItem
 import com.sembozdemir.altayersemih.network.model.Product
@@ -61,15 +62,15 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
         detailTextViewColor.text = product.color
 
-        detailLinearLayoutColor.setOnClickListener {
-            handleAddToBagClick(product)
-        }
-
         detailTextViewSize.text = product.sizeCode
 
-        detailLinearLayoutSize.setOnClickListener {
+        detailLinearLayoutColorAndSize.setOnClickListener {
             handleAddToBagClick(product)
         }
+
+        detailTextViewDescription.setHtml(product.description.orEmpty())
+
+        detailTextViewSizeAndFit.setHtml(product.sizeAndFit.orEmpty())
 
         setupPhotoViewPager(product.media)
 

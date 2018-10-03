@@ -41,6 +41,12 @@ data class Product(
         val color: String? = null,
 
         @Json(name = "sizeCode")
-        val sizeCode: String? = null
+        val sizeCode: String? = null,
+
+        @Json(name = "description")
+        val description: String? = null,
+
+        @Json(name = "sizeAndFit")
+        val sizeAndFit: String? = null
 
 ) : Parcelable

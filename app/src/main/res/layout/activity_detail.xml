@@ -83,7 +83,7 @@
             <include layout="@layout/layout_divider" />
 
             <LinearLayout
-                android:id="@+id/detailLinearLayoutColor"
+                android:id="@+id/detailLinearLayoutColorAndSize"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_medium"
@@ -113,7 +113,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/detailLinearLayoutSize"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -139,6 +138,38 @@
             </LinearLayout>
 
             <include layout="@layout/layout_divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextStyle.14"
+                android:textColor="@color/gray"
+                android:text="@string/detail_description_label"/>
+
+            <TextView
+                android:id="@+id/detailTextViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:textAppearance="@style/TextStyle.16.Bold"
+                tools:text="NIKE Tshirt is nice" />
+
+            <include layout="@layout/layout_divider" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextStyle.14"
+                android:textColor="@color/gray"
+                android:text="@string/detail_size_and_fit_label"/>
+
+            <TextView
+                android:id="@+id/detailTextViewSizeAndFit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_small"
+                android:textAppearance="@style/TextStyle.16.Bold"
+                tools:text="NIKE Tshirt is nice" />
 
             <View
                 android:layout_width="match_parent"

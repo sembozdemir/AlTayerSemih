@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/space_small"
-                        android:textAppearance="@style/TextStyle.16.Bold"
+                        android:textAppearance="@style/TextStyle.16"
                         tools:text="XS" />
 
                 </LinearLayout>

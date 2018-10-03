@@ -64,7 +64,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
         detailTextViewColor.text = product.color
 
-        detailTextViewSize.text = product.sizeCode
+        setupSizeSelection(product, selectedSizeLabel)
 
         detailLinearLayoutColorAndSize.setOnClickListener {
             handleAddToBagClick(product)
@@ -81,6 +81,18 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
             it.setProduct(product, selectedSizeLabel)
         }
 
+    }
+
+    private fun setupSizeSelection(product: Product, selectedSizeLabel: String?) {
+        val optionsItemForSize = product.configurableAttributes
+                .find { it.code == ProductConfigItem.SIZE_CODE }
+        val sizeLabelStringBuilder = StringBuilder()
+        optionsItemForSize?.options?.forEach {
+            sizeLabelStringBuilder.append(it.label).append("   ")
+        }
+
+        detailTextViewSize.text = SizeOptionSpannableCreator().getSizeOptionText(selectedSizeLabel,
+                sizeLabelStringBuilder.toString())
     }
 
     private fun handleAddToBagClick(product: Product) {

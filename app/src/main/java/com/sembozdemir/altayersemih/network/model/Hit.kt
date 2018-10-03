@@ -22,6 +22,9 @@ data class Hit(
         @field:Json(name = "slug")
         val slug: String? = null,
 
+        @field:Json(name = "color")
+        val color: String? = null,
+
         @field:Json(name = "price")
         val price: Double? = null,
 

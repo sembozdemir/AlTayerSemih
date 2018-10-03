@@ -2,14 +2,12 @@ package com.sembozdemir.altayersemih.ui.list
 
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
-import android.widget.Toast
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.setOnEndlessScrollListener
 import com.sembozdemir.altayersemih.network.model.Hit
 import com.sembozdemir.altayersemih.ui.detail.DetailActivity
+import com.sembozdemir.altayersemih.util.ColorMapper
 import kotlinx.android.synthetic.main.activity_list.*
 import javax.inject.Inject
 
@@ -25,7 +23,10 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     @Inject
     lateinit var paginator: Paginator
 
-    private val recyclerAdapter = RecyclerAdapter(mutableListOf())
+    @Inject
+    lateinit var colorMapper: ColorMapper
+
+    private var recyclerAdapter: RecyclerAdapter? = null
 
     override fun createPresenter() = listPresenter
 
@@ -34,11 +35,13 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        recyclerAdapter = RecyclerAdapter(colorMapper = colorMapper)
+
         listSwipeRefreshLayout.setOnRefreshListener {
             presenter.refreshList()
         }
 
-        recyclerAdapter.onItemClick {
+        recyclerAdapter?.onItemClick {
             startActivity(DetailActivity.newIntent(this@ListActivity, it.sku.orEmpty()))
         }
 
@@ -73,11 +76,11 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
     }
 
     override fun populateList(hits: List<Hit>?) {
-        recyclerAdapter.updateItems(hits.orEmpty())
+        recyclerAdapter?.updateItems(hits.orEmpty())
     }
 
     override fun addMoreItems(hits: List<Hit>?) {
-        recyclerAdapter.addItems(hits.orEmpty())
+        recyclerAdapter?.addItems(hits.orEmpty())
     }
 
     override fun setTotalPages(totalPages: Int) {

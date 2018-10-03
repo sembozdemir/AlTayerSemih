@@ -11,7 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="@dimen/space_default"
+        android:paddingStart="@dimen/space_large"
+        android:paddingTop="@dimen/space_default"
+        android:paddingEnd="@dimen/space_large"
+        android:paddingBottom="@dimen/space_default"
         android:textAppearance="@style/TextStyle.14.Bold"
         tools:text="XS" />
 

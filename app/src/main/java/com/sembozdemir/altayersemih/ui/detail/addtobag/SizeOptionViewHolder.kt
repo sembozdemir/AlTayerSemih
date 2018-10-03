@@ -11,9 +11,14 @@ class SizeOptionViewHolder(itemView: View) : ConfigOptionViewHolder(itemView) {
     override fun bind(item: OptionsItem, selected: Boolean) {
         with(itemView) {
             setBackgroundColor(
-                    if (selected) ContextCompat.getColor(context, R.color.black)
-                    else ContextCompat.getColor(context, R.color.white)
+                    when {
+                        selected -> ContextCompat.getColor(context, R.color.black)
+                        item.isInStock == true -> ContextCompat.getColor(context, R.color.white)
+                        else -> ContextCompat.getColor(context, R.color.light_gray)
+                    }
             )
+
+            itemView.isClickable = item.isInStock == true
 
             itemSizeOptionTextView.setTextColor(
                     if (selected) ContextCompat.getColor(context, R.color.white)

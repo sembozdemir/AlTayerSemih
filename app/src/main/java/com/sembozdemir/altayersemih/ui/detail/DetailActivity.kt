@@ -5,14 +5,19 @@ import android.content.Intent
 import android.os.Bundle
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
+import com.sembozdemir.altayersemih.extensions.findFragment
+import com.sembozdemir.altayersemih.extensions.fragmentTag
 import com.sembozdemir.altayersemih.network.model.Media
+import com.sembozdemir.altayersemih.network.model.OptionsItem
 import com.sembozdemir.altayersemih.network.model.Product
 import com.sembozdemir.altayersemih.ui.detail.addtobag.AddToBagDialogFragment
+import com.sembozdemir.altayersemih.ui.detail.addtobag.ProductConfigItem
 import com.sembozdemir.altayersemih.ui.photo.PhotoPagerAdapter
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
-class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
+class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
+        AddToBagDialogFragment.OnOptionItemSelectedListener {
 
     companion object {
 
@@ -68,11 +73,16 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
 
         setupPhotoViewPager(product.media)
 
+        val fragment = supportFragmentManager.findFragment<AddToBagDialogFragment>()
+        fragment?.let {
+            it.setProduct(product)
+        }
+
     }
 
     private fun handleAddToBagClick(product: Product) {
         val addToBagDialogFragment = AddToBagDialogFragment.newInstance(product)
-        addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.tag)
+        addToBagDialogFragment.show(supportFragmentManager, addToBagDialogFragment.fragmentTag)
     }
 
     private fun setupPhotoViewPager(media: List<Media>?) {
@@ -81,5 +91,35 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView {
                 imageUrls, zoomEnabled = false)
 
         detailCircleIndicatorPhotos.setViewPager(detailViewPagerPhotos)
+    }
+
+    override fun onOptionItemSelected(otherProductConfigItem: ProductConfigItem?, optionsItem: OptionsItem) {
+
+        if (otherProductConfigItem == null) {
+            val sku = optionsItem.simpleProductSkus.first()
+            presenter.loadProduct(sku)
+            return
+        }
+
+        when (otherProductConfigItem.type) {
+            ProductConfigItem.COLOR -> {
+                val position = otherProductConfigItem.optionsItem
+                        .indexOfFirst { detailTextViewColor.text == it.label }
+
+                if (position != -1) {
+                    val sku = optionsItem.simpleProductSkus[position]
+                    presenter.loadProduct(sku)
+                }
+            }
+            ProductConfigItem.SIZE_CODE -> {
+                val position = otherProductConfigItem.optionsItem
+                        .indexOfFirst { detailTextViewSize.text == it.label }
+
+                if (position != -1) {
+                    val sku = optionsItem.simpleProductSkus[position]
+                    presenter.loadProduct(sku)
+                }
+            }
+        }
     }
 }

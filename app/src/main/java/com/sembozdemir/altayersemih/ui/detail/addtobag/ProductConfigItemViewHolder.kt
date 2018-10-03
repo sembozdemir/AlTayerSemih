@@ -4,9 +4,22 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.sembozdemir.altayersemih.R
+import com.sembozdemir.altayersemih.network.model.OptionsItem
 import kotlinx.android.synthetic.main.item_product_config.view.*
 
 class ProductConfigItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    private var onOptionSelectedFunc: (
+            productConfigItem: ProductConfigItem,
+            optionsItem: OptionsItem
+    ) -> Unit = { _, _ -> }
+
+    fun onOptionSelected(func: (
+            productConfigItem: ProductConfigItem,
+            optionsItem: OptionsItem
+    ) -> Unit) {
+        onOptionSelectedFunc = func
+    }
 
     fun bind(item: ProductConfigItem) {
         with(itemView) {
@@ -24,11 +37,18 @@ class ProductConfigItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
             val configOptionsRecyclerAdapter = ConfigOptionsRecyclerAdapter(item)
             productConfigRecyclerView.adapter = configOptionsRecyclerAdapter
 
-            val selectedPos = item.optionsItem.indexOfFirst {
-                it.label == item.color
+            var selectedPos = item.optionsItem
+                    .indexOfFirst { it.label == item.color }
+
+            if (selectedPos == -1) {
+                selectedPos = item.optionsItem.indexOfFirst { it.label == item.size }
             }
 
             configOptionsRecyclerAdapter.selectItem(selectedPos)
+
+            configOptionsRecyclerAdapter.onItemClick { optionsItem ->
+                onOptionSelectedFunc(item, optionsItem)
+            }
 
         }
     }

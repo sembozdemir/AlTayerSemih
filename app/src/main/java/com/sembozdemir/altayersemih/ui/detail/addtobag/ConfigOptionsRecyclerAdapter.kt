@@ -4,13 +4,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.extensions.inflate
-import java.lang.IllegalStateException
+import com.sembozdemir.altayersemih.network.model.OptionsItem
 
 class ConfigOptionsRecyclerAdapter(
         private val productConfigItem: ProductConfigItem
 ) : RecyclerView.Adapter<ConfigOptionViewHolder>() {
 
     private var selectedPos = INVALID_POSITION
+
+    private var onItemClickFunc: (item: OptionsItem) -> Unit = {}
 
     companion object {
         const val INVALID_POSITION = -1
@@ -26,8 +28,13 @@ class ConfigOptionsRecyclerAdapter(
         }.apply {
             itemView.setOnClickListener {
                 selectItem(adapterPosition)
+                onItemClickFunc(productConfigItem.optionsItem[adapterPosition])
             }
         }
+    }
+
+    fun onItemClick(func: (item: OptionsItem) -> Unit) {
+        onItemClickFunc = func
     }
 
     fun selectItem(position: Int) {

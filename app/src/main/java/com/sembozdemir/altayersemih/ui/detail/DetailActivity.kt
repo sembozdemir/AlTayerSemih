@@ -62,6 +62,8 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
         enableHomeAsUp(detailToolbar)
 
+        showLoading()
+
         supportPostponeEnterTransition()
         Picasso.get().load(ImageUrl.forDetail(imageUrl))
                 .fit()
@@ -81,6 +83,8 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
     }
 
     override fun showProduct(product: Product) {
+
+        hideLoading()
 
         detailToolbar.title = product.name
 
@@ -112,6 +116,15 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         val fragment = supportFragmentManager.findFragment<AddToBagDialogFragment>()
         fragment?.setProduct(product, selectedSizeLabel)
 
+    }
+
+    private fun showLoading() {
+        detailProgressBar.show()
+        detailProgressBar.setVisible(true)
+    }
+
+    private fun hideLoading() {
+        detailProgressBar.hide()
     }
 
     private fun scheduleStartPostponedTransition(view: View) {
@@ -190,10 +203,12 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         when (productConfigItem.type) {
             ProductConfigItem.COLOR -> {
                 selectedSizeLabel = null
+                showLoading()
                 presenter.loadSelectedColor(optionsItem)
             }
             ProductConfigItem.SIZE_CODE -> {
                 selectedSizeLabel = optionsItem.label
+                showLoading()
                 presenter.loadSelectedSize(productConfigItem.sameColorSiblings, optionsItem)
             }
         }

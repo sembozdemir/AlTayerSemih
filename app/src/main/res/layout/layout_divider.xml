@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="1dp"
+    android:layout_marginStart="@dimen/space_default"
     android:layout_marginTop="@dimen/space_default"
+    android:layout_marginEnd="@dimen/space_default"
     android:layout_marginBottom="@dimen/space_default"
     android:background="@color/light_gray"
     tools:showIn="@layout/activity_detail" />

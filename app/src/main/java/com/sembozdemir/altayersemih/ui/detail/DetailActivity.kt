@@ -192,15 +192,11 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         when (productConfigItem.type) {
             ProductConfigItem.COLOR -> {
                 selectedSizeLabel = null
-                val sku = optionsItem.simpleProductSkus.first()
-                presenter.loadProduct(sku)
+                presenter.loadSelectedColor(optionsItem)
             }
             ProductConfigItem.SIZE_CODE -> {
                 selectedSizeLabel = optionsItem.label
-                val sku = productConfigItem.sameColorSiblings
-                        .intersect(optionsItem.simpleProductSkus)
-                        .first()
-                presenter.loadProduct(sku)
+                presenter.loadSelectedSize(productConfigItem.sameColorSiblings, optionsItem)
             }
         }
     }

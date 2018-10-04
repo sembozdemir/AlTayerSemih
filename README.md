@@ -41,6 +41,18 @@ Also, some little changes are needed on other classes.[*](https://github.com/sem
 Images of products may be seen in fullscreen mode. It also supports
 zooming feature.
 
+## Multi-brand flavors
+Product flavors may be used for multi-branding. Multiple apks may be generated with this project.
+
+Base api url is configurable as a `buildConfigField` by flavor.[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/build.gradle#L45)
+
+`applicationIdSuffix` may also be added by flavor.[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/build.gradle#L44)
+
+Colors may be changed by overriding resource files.[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/prodNisnass/res/values/colors.xml#L3)
+For example, if `prodNisnassDebug` build variant is selected, application will be seen in green color.
+
+Even layouts may be changed in this way.
+
 ## Used 3rd party libraries
 - Mosby MVP
 - Dagger

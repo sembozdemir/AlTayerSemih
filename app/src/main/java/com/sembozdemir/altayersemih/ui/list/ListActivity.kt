@@ -1,7 +1,9 @@
 package com.sembozdemir.altayersemih.ui.list
 
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.setOnEndlessScrollListener
@@ -41,8 +43,8 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
             presenter.refreshList()
         }
 
-        recyclerAdapter?.onItemClick {
-            startActivity(DetailActivity.newIntent(this@ListActivity, it.sku.orEmpty()))
+        recyclerAdapter?.onItemClick { hit, transitionView ->
+            navigateToDetail(hit, transitionView)
         }
 
         with(listRecyclerView) {
@@ -60,6 +62,16 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
         showLoading()
         presenter.fetchList()
+    }
+
+    private fun navigateToDetail(hit: Hit, transitionView: View) {
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@ListActivity,
+                transitionView, getString(R.string.transition_detail_photo))
+
+        startActivity(DetailActivity.newIntent(this@ListActivity,
+                hit.sku.orEmpty(),
+                hit.image.orEmpty()),
+                options.toBundle())
     }
 
     private fun showLoading() {

@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.sembozdemir.altayersemih.customview.ClickableViewPager
         android:id="@+id/fullScreenPhotosViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:transitionName="@string/transition_fullscreen_photo"
+        tools:targetApi="lollipop" />
 
     <me.relex.circleindicator.CircleIndicator
         android:id="@+id/fullScreenCircleIndicator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/circle_indicator_height"
-        android:layout_gravity="bottom"/>
+        android:layout_gravity="bottom" />
 
 </FrameLayout>

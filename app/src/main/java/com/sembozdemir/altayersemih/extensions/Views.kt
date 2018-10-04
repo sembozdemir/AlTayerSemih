@@ -6,6 +6,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
@@ -29,4 +30,21 @@ fun TextView.setHtml(htmlText: String) {
     } else {
         text = Html.fromHtml(htmlText)
     }
+}
+
+/**
+ * Performs the given action when the view tree is about to be drawn.
+ */
+inline fun View.doOnPreDraw(crossinline action: (view: View) -> Unit) {
+    val vto = viewTreeObserver
+    vto.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+        override fun onPreDraw(): Boolean {
+            action(this@doOnPreDraw)
+            when {
+                vto.isAlive -> vto.removeOnPreDrawListener(this)
+                else -> viewTreeObserver.removeOnPreDrawListener(this)
+            }
+            return true
+        }
+    })
 }

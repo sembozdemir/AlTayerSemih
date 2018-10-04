@@ -1,10 +1,13 @@
 package com.sembozdemir.altayersemih.ui.detail
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.view.View
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.*
@@ -17,6 +20,7 @@ import com.sembozdemir.altayersemih.ui.detail.photo.FullScreenPhotosActivity
 import com.sembozdemir.altayersemih.ui.detail.photo.PhotoPagerAdapter
 import com.sembozdemir.altayersemih.util.ColorMapper
 import com.sembozdemir.altayersemih.util.ImageUrl
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_detail.*
 import javax.inject.Inject
 
@@ -26,9 +30,14 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
     companion object {
 
         private const val EXTRA_SKU = "sku"
+        private const val EXTRA_IMAGE_URL = "imageUrl"
+        private const val REQUEST_CODE_CURRENT_ITEM = 10
 
-        fun newIntent(context: Context, sku: String): Intent = Intent(context, DetailActivity::class.java)
-                .putExtra(EXTRA_SKU, sku)
+        fun newIntent(context: Context, sku: String, imageUrl: String): Intent {
+            return Intent(context, DetailActivity::class.java)
+                    .putExtra(EXTRA_SKU, sku)
+                    .putExtra(EXTRA_IMAGE_URL, imageUrl)
+        }
 
     }
 
@@ -40,6 +49,8 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
 
     private val sku by lazy { intent.getStringExtra(EXTRA_SKU).orEmpty() }
 
+    private val imageUrl by lazy { intent.getStringExtra(EXTRA_IMAGE_URL).orEmpty() }
+
     private var selectedSizeLabel: String? = null
 
     override fun createPresenter() = detailPresenter
@@ -49,12 +60,27 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        presenter.loadProduct(sku)
+        enableHomeAsUp(detailToolbar)
+
+        supportPostponeEnterTransition()
+        Picasso.get().load(ImageUrl.forDetail(imageUrl))
+                .fit()
+                .centerCrop()
+                .into(detailImageViewPhoto) {
+                    onSuccess {
+                        scheduleStartPostponedTransition(detailImageViewPhoto)
+                        presenter.loadProduct(sku)
+                    }
+
+                    onError {
+                        scheduleStartPostponedTransition(detailImageViewPhoto)
+                        presenter.loadProduct(sku)
+                    }
+                }
+
     }
 
     override fun showProduct(product: Product) {
-
-        enableHomeAsUp(detailToolbar)
 
         detailToolbar.title = product.name
 
@@ -88,6 +114,12 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
             it.setProduct(product, selectedSizeLabel)
         }
 
+    }
+
+    private fun scheduleStartPostponedTransition(view: View) {
+        view.doOnPreDraw {
+            supportStartPostponedEnterTransition()
+        }
     }
 
     private fun setupColorDrawable(product: Product) {
@@ -145,8 +177,14 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
     }
 
     private fun navigateToFullScreenPhoto(imageUrls: List<String>) {
-        startActivity(FullScreenPhotosActivity.newIntent(this,
-                imageUrls, detailViewPagerPhotos.currentItem))
+
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@DetailActivity,
+                detailViewPagerPhotos, getString(R.string.transition_fullscreen_photo))
+
+        startActivityForResult(FullScreenPhotosActivity.newIntent(this,
+                imageUrls, detailViewPagerPhotos.currentItem),
+                REQUEST_CODE_CURRENT_ITEM,
+                options.toBundle())
     }
 
     override fun onOptionItemSelected(productConfigItem: ProductConfigItem, optionsItem: OptionsItem) {
@@ -165,5 +203,18 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
                 presenter.loadProduct(sku)
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == REQUEST_CODE_CURRENT_ITEM && resultCode == Activity.RESULT_OK) {
+            val currentItem = data?.getIntExtra(FullScreenPhotosActivity.EXTRA_CURRENT_ITEM, 0) ?: 0
+            detailViewPagerPhotos.currentItem = currentItem
+        }
+    }
+
+    override fun finishAfterTransition() {
+        finish()
     }
 }

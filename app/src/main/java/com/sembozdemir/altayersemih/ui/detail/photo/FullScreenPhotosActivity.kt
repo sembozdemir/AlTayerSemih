@@ -1,5 +1,6 @@
 package com.sembozdemir.altayersemih.ui.detail.photo
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -33,5 +34,13 @@ class FullScreenPhotosActivity : BaseSimpleActivity() {
         fullScreenCircleIndicator.setViewPager(fullScreenPhotosViewPager)
 
         fullScreenPhotosViewPager.currentItem = currentItem
+    }
+
+    override fun onBackPressed() {
+
+        setResult(Activity.RESULT_OK,
+                Intent().putExtra(EXTRA_CURRENT_ITEM, fullScreenPhotosViewPager.currentItem))
+
+        super.onBackPressed()
     }
 }

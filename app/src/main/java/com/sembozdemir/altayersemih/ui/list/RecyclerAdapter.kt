@@ -1,24 +1,26 @@
 package com.sembozdemir.altayersemih.ui.list
 
 import android.support.v7.widget.RecyclerView
+import android.view.View
 import android.view.ViewGroup
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.extensions.autoNotify
 import com.sembozdemir.altayersemih.extensions.inflate
 import com.sembozdemir.altayersemih.network.model.Hit
 import com.sembozdemir.altayersemih.util.ColorMapper
+import kotlinx.android.synthetic.main.item_grid_product.view.*
 
 class RecyclerAdapter(
-        val items: MutableList<Hit> = mutableListOf(),
-        val colorMapper: ColorMapper
+        private val items: MutableList<Hit> = mutableListOf(),
+        private val colorMapper: ColorMapper
 ): RecyclerView.Adapter<ItemViewHolder>() {
 
-    private var onItemClickFunc: (hit: Hit) -> Unit = {}
+    private var onItemClickFunc: (hit: Hit, transitionView: View) -> Unit = { _, _ -> }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         return ItemViewHolder(parent.inflate(R.layout.item_grid_product)).apply {
             itemView.setOnClickListener {
-                onItemClickFunc(items[adapterPosition])
+                onItemClickFunc(items[adapterPosition], it.itemImageView)
             }
         }
     }
@@ -29,7 +31,7 @@ class RecyclerAdapter(
         viewHolder.bind(items[position], colorMapper)
     }
 
-    fun onItemClick(func: (hit: Hit) -> Unit) {
+    fun onItemClick(func: (hit: Hit, transitionView: View) -> Unit) {
         onItemClickFunc = func
     }
 

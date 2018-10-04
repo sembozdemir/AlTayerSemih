@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="transition_detail_photo" translatable="false">transition_detail_photo</string>
+    <string name="transition_fullscreen_photo" translatable="false">transition_fullscreen_photo</string>
+</resources>

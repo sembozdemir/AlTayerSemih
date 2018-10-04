@@ -110,9 +110,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         setupPhotoViewPager(product.media)
 
         val fragment = supportFragmentManager.findFragment<AddToBagDialogFragment>()
-        fragment?.let {
-            it.setProduct(product, selectedSizeLabel)
-        }
+        fragment?.setProduct(product, selectedSizeLabel)
 
     }
 

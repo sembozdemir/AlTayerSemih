@@ -16,7 +16,10 @@ class DetailPresenter(
                         onSuccess = { product ->
                             ifViewAttached { it.showProduct(product) }
                         },
-                        onError = { Timber.e(it) }
+                        onError = { throwable ->
+                            Timber.e(throwable)
+                            ifViewAttached { it.showError(sku) }
+                        }
                 )
     }
 

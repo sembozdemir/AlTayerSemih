@@ -5,4 +5,5 @@ import com.sembozdemir.altayersemih.network.model.Product
 
 interface DetailView : BaseView {
     fun showProduct(product: Product)
+    fun showError(retrySku: String)
 }

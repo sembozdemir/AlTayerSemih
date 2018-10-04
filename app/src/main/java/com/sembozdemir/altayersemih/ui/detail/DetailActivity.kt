@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityOptionsCompat
 import android.view.View
 import com.sembozdemir.altayersemih.R
@@ -116,6 +117,16 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
         val fragment = supportFragmentManager.findFragment<AddToBagDialogFragment>()
         fragment?.setProduct(product, selectedSizeLabel)
 
+    }
+
+    override fun showError(retrySku: String) {
+        hideLoading()
+        detailCoordinatorLayout.snack(R.string.general_error, Snackbar.LENGTH_INDEFINITE) {
+            action(R.string.retry) {
+                showLoading()
+                presenter.loadProduct(retrySku)
+            }
+        }
     }
 
     private fun showLoading() {

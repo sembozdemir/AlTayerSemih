@@ -52,9 +52,7 @@ If user clicks on 'Add to bag' button, a dummy toast message will appear. There 
 
 *Screenshots:*
 
-<img src="screenshots/screenshot3.png" width="160" />,<img src="screenshots/screenshot4.png" width="160" />
-
-<img src="screenshots/screenshot5.png" width="160" />,<img src="screenshots/screenshot6.png" width="160" />
+<img src="screenshots/screenshot3.png" width="160" />,<img src="screenshots/screenshot4.png" width="160" />,<img src="screenshots/screenshot5.png" width="160" />,<img src="screenshots/screenshot6.png" width="160" />
 
 **How to implement a new option?**
 

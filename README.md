@@ -46,7 +46,7 @@ to show `options` items horizontally. So, if there is a color option, it will be
 If user selects a new color, product will be requested again with a new `sku`. Size option will be deselected 
 and 'Add to bag' button will be disabled.
 
-If user selects a new size, product will be requested again with a new `sku`. 'Add to bag' button will be disabled if user is not selected any size.
+If user selects a new size, product will be requested again with a new `sku`. 'Add to bag' button will be disabled if user does not select any size.
 
 If user clicks on 'Add to bag' button, a dummy toast message will appear. There is no real cart implementation.[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/AddToBagDialogFragment.kt#L68)
 

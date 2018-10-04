@@ -12,7 +12,7 @@ class SizeOptionViewHolder(itemView: View) : ConfigOptionViewHolder(itemView) {
         with(itemView) {
             setBackgroundColor(
                     when {
-                        selected -> ContextCompat.getColor(context, R.color.black)
+                        selected -> ContextCompat.getColor(context, R.color.colorPrimary)
                         item.isInStock == true -> ContextCompat.getColor(context, R.color.white)
                         else -> ContextCompat.getColor(context, R.color.light_gray)
                     }

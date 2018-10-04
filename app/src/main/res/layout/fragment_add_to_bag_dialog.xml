@@ -14,7 +14,7 @@
 
     <Button
         android:id="@+id/addToBagButton"
-        style="@style/ButtonStyle.Black"
+        style="@style/ButtonStyle"
         android:layout_margin="@dimen/space_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

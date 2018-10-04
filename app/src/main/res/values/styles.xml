@@ -3,10 +3,7 @@
     <style name="ButtonStyle" parent="android:Widget.Button">
         <item name="android:textAllCaps">true</item>
         <item name="android:textAppearance">@style/TextStyle.18.Bold</item>
-    </style>
-
-    <style name="ButtonStyle.Black">
-        <item name="android:background">@drawable/button_black</item>
+        <item name="android:background">@drawable/button_background</item>
         <item name="android:textColor">@color/white</item>
     </style>
 

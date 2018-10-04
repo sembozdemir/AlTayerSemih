@@ -26,6 +26,7 @@ class ProductConfigItemViewHolder(itemView: View) : RecyclerView.ViewHolder(item
             productConfigTextViewTitle.text = when (item.type) {
                 ProductConfigItem.COLOR -> context.getString(R.string.product_config_title_color)
                 ProductConfigItem.SIZE_CODE -> context.getString(R.string.product_config_title_size)
+                // TODO: add more title of new option type if needed
                 else -> ""
             }
 

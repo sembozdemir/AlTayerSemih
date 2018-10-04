@@ -24,6 +24,7 @@ class ConfigOptionsRecyclerAdapter(
         return when (viewType) {
             COLOR_VIEW_TYPE -> ColorOptionViewHolder(parent.inflate(R.layout.item_color_option))
             SIZE_VIEW_TYPE -> SizeOptionViewHolder(parent.inflate(R.layout.item_size_option))
+            // TODO: add more view type of new option type if needed
             else -> throw IllegalStateException("Option could not found with view type $viewType")
         }.apply {
             itemView.setOnClickListener {
@@ -49,6 +50,7 @@ class ConfigOptionsRecyclerAdapter(
         return when (productConfigItem.type) {
             ProductConfigItem.COLOR -> COLOR_VIEW_TYPE
             ProductConfigItem.SIZE_CODE -> SIZE_VIEW_TYPE
+            // TODO: add more view type of new option type if needed
             else -> throw IllegalStateException(
                     "View type could not found with ${productConfigItem.type}"
             )

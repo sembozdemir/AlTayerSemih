@@ -14,6 +14,7 @@ data class ProductConfigItem(
     companion object {
         const val COLOR = "color"
         const val SIZE_CODE = "sizeCode"
+        // TODO: add more `code` string of new option type if needed
     }
 
 }

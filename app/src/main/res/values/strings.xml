@@ -7,4 +7,5 @@
     <string name="detail_size_and_fit_label">Size and Fit</string>
     <string name="general_error">Oops! Something went wrong :(</string>
     <string name="retry">Retry</string>
+    <string name="product_added_to_bag">Product is added to your bag</string>
 </resources>

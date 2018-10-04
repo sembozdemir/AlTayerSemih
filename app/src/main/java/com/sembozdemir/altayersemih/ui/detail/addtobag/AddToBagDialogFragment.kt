@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.network.model.OptionsItem
 import com.sembozdemir.altayersemih.network.model.Product
@@ -61,6 +62,11 @@ class AddToBagDialogFragment : BottomSheetDialogFragment() {
 
         addToBagButton.isEnabled = !selectedSizeLabel.isNullOrEmpty()
         setupRecyclerViewConfigs(product, selectedSizeLabel)
+
+        addToBagButton.setOnClickListener {
+            Toast.makeText(activity, R.string.product_added_to_bag, Toast.LENGTH_LONG).show()
+            // TODO: implement a real 'add to bag' implementation
+        }
     }
 
     private fun setupRecyclerViewConfigs(product: Product?, selectedSizeLabel: String?) {

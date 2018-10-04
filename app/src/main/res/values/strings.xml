@@ -5,4 +5,6 @@
     <string name="product_config_title_size">Size</string>
     <string name="detail_description_label">Description</string>
     <string name="detail_size_and_fit_label">Size and Fit</string>
+    <string name="general_error">Oops! Something went wrong :(</string>
+    <string name="retry">Retry</string>
 </resources>

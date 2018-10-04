@@ -9,4 +9,5 @@ interface ListView : BaseView {
     fun populateList(hits: List<Hit>?)
     fun addMoreItems(hits: List<Hit>?)
     fun setTotalPages(totalPages: Int)
+    fun showError()
 }

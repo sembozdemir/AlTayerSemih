@@ -24,4 +24,6 @@ class PaginatorImpl: Paginator {
         val nextPage = page + 1
         return nextPage <= totalPages
     }
+
+    override fun getCurrentPage() = page
 }

@@ -2,6 +2,7 @@ package com.sembozdemir.altayersemih.ui.list
 
 import com.sembozdemir.altayersemih.core.BasePresenter
 import com.sembozdemir.altayersemih.network.list.ListRepository
+import com.sembozdemir.altayersemih.network.model.ListResponse
 import com.sembozdemir.altayersemih.util.ColorMapper
 import io.reactivex.rxkotlin.subscribeBy
 import timber.log.Timber
@@ -15,17 +16,13 @@ class ListPresenter(
         listRepository.fetchList(page)
                 .subscribeBy(
                         onSuccess = { listResponse ->
-                            colorMapper.setColorValues(
-                                    listResponse.facets?.color?.colorValue.orEmpty()
-                            )
-
-                            ifViewAttached {
-                                it.setTotalPages(listResponse.pagination?.totalPages ?: 0)
-                                it.showCategoryName(listResponse.categoryName.orEmpty())
-                                it.addMoreItems(listResponse.hits)
-                            }
+                            handleListResponse(listResponse)
+                            ifViewAttached { it.addMoreItems(listResponse.hits) }
                         },
-                        onError = { Timber.e(it) }
+                        onError = { throwable ->
+                            Timber.e(throwable)
+                            ifViewAttached { it.showError() }
+                        }
                 )
     }
 
@@ -33,12 +30,25 @@ class ListPresenter(
         listRepository.fetchList()
                 .subscribeBy(
                         onSuccess = { listResponse ->
-                            ifViewAttached {
-                                it.showCategoryName(listResponse.categoryName.orEmpty())
-                                it.populateList(listResponse.hits)
-                            }
+                            handleListResponse(listResponse)
+                            ifViewAttached { it.populateList(listResponse.hits) }
                         },
-                        onError = { Timber.e(it) }
+                        onError = { throwable ->
+                            Timber.e(throwable)
+                            ifViewAttached { it.showError() }
+                        }
                 )
+    }
+
+    private fun handleListResponse(listResponse: ListResponse) {
+        colorMapper.setColorValues(
+                listResponse.facets?.color?.colorValue.orEmpty()
+        )
+
+        ifViewAttached {
+            it.setTotalPages(listResponse.pagination?.totalPages ?: 0)
+            it.showCategoryName(listResponse.categoryName.orEmpty())
+        }
+
     }
 }

@@ -5,4 +5,5 @@ interface Paginator {
     fun getTotalPages(): Int
     fun getNextPage(): Int
     fun hasNextPage(): Boolean
+    fun getCurrentPage(): Int
 }

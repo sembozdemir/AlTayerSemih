@@ -1,12 +1,15 @@
 package com.sembozdemir.altayersemih.ui.list
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.GridLayoutManager
 import android.view.View
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
+import com.sembozdemir.altayersemih.extensions.action
 import com.sembozdemir.altayersemih.extensions.setOnEndlessScrollListener
+import com.sembozdemir.altayersemih.extensions.snack
 import com.sembozdemir.altayersemih.network.model.Hit
 import com.sembozdemir.altayersemih.ui.detail.DetailActivity
 import com.sembozdemir.altayersemih.util.ColorMapper
@@ -97,5 +100,15 @@ class ListActivity : BaseActivity<ListView, ListPresenter>(), ListView {
 
     override fun setTotalPages(totalPages: Int) {
         paginator.setTotalPages(totalPages)
+    }
+
+    override fun showError() {
+        hideLoading()
+        listLinearLayoutRoot.snack(R.string.general_error, Snackbar.LENGTH_INDEFINITE) {
+            action(R.string.retry) {
+                showLoading()
+                presenter.fetchList(paginator.getCurrentPage())
+            }
+        }
     }
 }

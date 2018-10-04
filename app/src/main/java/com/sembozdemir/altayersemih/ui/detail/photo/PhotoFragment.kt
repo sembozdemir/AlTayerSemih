@@ -1,4 +1,4 @@
-package com.sembozdemir.altayersemih.ui.photo
+package com.sembozdemir.altayersemih.ui.detail.photo
 
 import android.os.Bundle
 import android.view.View
@@ -12,18 +12,14 @@ class PhotoFragment : BaseSimpleFragment() {
 
     companion object {
 
-        private const val KEY_ZOOM_ENABLED = "zoomEnabled"
         private const val KEY_IMAGE_URL = "imageUrl"
 
-        fun newInstance(imageUrl: String?, zoomEnabled: Boolean = true) = PhotoFragment().apply {
+        fun newInstance(imageUrl: String?) = PhotoFragment().apply {
             arguments = Bundle().apply {
                 putString(KEY_IMAGE_URL, imageUrl)
-                putBoolean(KEY_ZOOM_ENABLED, zoomEnabled)
             }
         }
     }
-
-    private val zoomEnabled by lazy { arguments?.getBoolean(KEY_ZOOM_ENABLED) ?: true }
 
     private val imageUrl by lazy { arguments?.getString(KEY_IMAGE_URL) }
 
@@ -32,14 +28,12 @@ class PhotoFragment : BaseSimpleFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        photoView.isZoomable = zoomEnabled
-
         imageUrl?.let {
             photoView.setImageUrl(ImageUrl.forDetail(it)) {
                 fit()
-                centerCrop()
+                centerInside()
             }
-        } ?: photoView.setImageResource(R.drawable.ic_placeholder)
+        }
 
 
     }

@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.detail.DetailActivity" />
+        <activity android:name="com.sembozdemir.altayersemih.ui.detail.photo.FullScreenPhotosActivity" />
     </application>
 
 </manifest>

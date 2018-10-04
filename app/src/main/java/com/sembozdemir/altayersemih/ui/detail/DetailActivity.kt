@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.widget.Toast
 import com.sembozdemir.altayersemih.R
 import com.sembozdemir.altayersemih.core.BaseActivity
 import com.sembozdemir.altayersemih.extensions.*
@@ -14,7 +13,8 @@ import com.sembozdemir.altayersemih.network.model.OptionsItem
 import com.sembozdemir.altayersemih.network.model.Product
 import com.sembozdemir.altayersemih.ui.detail.addtobag.AddToBagDialogFragment
 import com.sembozdemir.altayersemih.ui.detail.addtobag.ProductConfigItem
-import com.sembozdemir.altayersemih.ui.photo.PhotoPagerAdapter
+import com.sembozdemir.altayersemih.ui.detail.photo.FullScreenPhotosActivity
+import com.sembozdemir.altayersemih.ui.detail.photo.PhotoPagerAdapter
 import com.sembozdemir.altayersemih.util.ColorMapper
 import com.sembozdemir.altayersemih.util.ImageUrl
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -133,16 +133,20 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
     }
 
     private fun setupPhotoViewPager(media: List<Media>?) {
-        val imageUrls = media?.mapNotNull { it.src }
-        detailViewPagerPhotos.adapter = PhotoPagerAdapter(supportFragmentManager,
-                imageUrls, zoomEnabled = false)
+        val imageUrls = media?.mapNotNull { it.src }.orEmpty()
+        detailViewPagerPhotos.adapter = PhotoPagerAdapter(supportFragmentManager, imageUrls,
+                asFullScreen = false)
 
         detailCircleIndicatorPhotos.setViewPager(detailViewPagerPhotos)
 
         detailViewPagerPhotos.setOnClickListener {
-            Toast.makeText(this@DetailActivity, "viewpager is clicked", Toast.LENGTH_LONG).show()
-            // todo: show photos on fullscreen pager
+            navigateToFullScreenPhoto(imageUrls)
         }
+    }
+
+    private fun navigateToFullScreenPhoto(imageUrls: List<String>) {
+        startActivity(FullScreenPhotosActivity.newIntent(this,
+                imageUrls, detailViewPagerPhotos.currentItem))
     }
 
     override fun onOptionItemSelected(productConfigItem: ProductConfigItem, optionsItem: OptionsItem) {

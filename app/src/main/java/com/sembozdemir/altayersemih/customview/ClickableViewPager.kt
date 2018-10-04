@@ -6,8 +6,13 @@ import android.util.AttributeSet
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
+import timber.log.Timber
 
-
+/**
+ * ViewPager that supports click event.
+ *
+ * Fix for PhotoView issue (see: https://github.com/chrisbanes/PhotoView/issues/31)
+ */
 class ClickableViewPager @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null
 ) : ViewPager(context, attrs) {
@@ -24,6 +29,17 @@ class ClickableViewPager @JvmOverloads constructor(
 
     override fun setOnClickListener(onClickListener: View.OnClickListener?) {
         this.onClickListener = onClickListener
+    }
+
+    override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
+        // Fix for PhotoView issue (see: https://github.com/chrisbanes/PhotoView/issues/31)
+        return try {
+            super.onInterceptTouchEvent(ev)
+        } catch (e: IllegalArgumentException) {
+            Timber.w(e)
+            false
+        }
+
     }
 
     private inner class OnSingleTapConfirmedGestureListener(

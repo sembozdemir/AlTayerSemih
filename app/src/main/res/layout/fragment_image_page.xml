@@ -2,12 +2,11 @@
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/black">
+    android:layout_height="wrap_content">
 
-    <com.github.chrisbanes.photoview.PhotoView
-        android:id="@+id/photoView"
+    <ImageView
+        android:id="@+id/imagePageImageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="@dimen/detail_toolbar_image_height"/>
 
 </FrameLayout>

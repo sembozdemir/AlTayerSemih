@@ -31,7 +31,7 @@
             <me.relex.circleindicator.CircleIndicator
                 android:id="@+id/detailCircleIndicatorPhotos"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/circle_indicator_height"
                 android:layout_gravity="bottom|center_horizontal" />
 
             <android.support.v7.widget.Toolbar

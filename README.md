@@ -33,9 +33,9 @@ If user clicks on 'Add to bag' button, a dummy toast message will appear. There 
 **How to implement a new option?**
 
 To implement a new option, [ConfigOptionViewHolder](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ConfigOptionViewHolder.kt)
-should be extended. `configurableAttribute[]/code` should be added to [ProductConfigItem](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ProductConfigItem.kt).
-Also, some little changes are needed on other classes.[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ProductConfigItemViewHolder.kt#L28)
-[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ConfigOptionsRecyclerAdapter.kt#L26)
+should be extended. `configurableAttribute[]/code` should be added to [ProductConfigItem](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ProductConfigItem.kt#L17).
+Also, some little changes are needed on other classes.[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ProductConfigItemViewHolder.kt#L29)
+[*](https://github.com/sembozdemir/AlTayerSemih/blob/master/app/src/main/java/com/sembozdemir/altayersemih/ui/detail/addtobag/ConfigOptionsRecyclerAdapter.kt#L27)
 
 ## 3. Fullscreen Photo Screen
 Images of products may be seen in fullscreen mode. It also supports

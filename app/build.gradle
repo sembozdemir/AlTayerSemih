@@ -15,6 +15,9 @@ def NISNASS_IMAGE_BASE_URL_FOR_LIST = "\"https://nis-prod.atgcdn.ae/small_light(
 def DEFAULT_IMAGE_BASE_URL_FOR_DETAIL = "\"https://nis-prod.atgcdn.ae/small_light(p=zoom,of=jpg,q=70)/pub/media/catalog/product\""
 def NISNASS_IMAGE_BASE_URL_FOR_DETAIL = "\"https://nis-prod.atgcdn.ae/small_light(p=zoom,of=jpg,q=70)/pub/media/catalog/product\""
 
+def DEFAULT_IMAGE_BASE_URL_FOR_SWATCH = "\"https://nis-prod.atgcdn.ae/small_light(cw=70,ch=70,dw=70,dh=70,of=webp,q=90)/media/attribute/swatch\""
+def NISNASS_IMAGE_BASE_URL_FOR_SWATCH = "\"https://nis-prod.atgcdn.ae/small_light(cw=70,ch=70,dw=70,dh=70,of=webp,q=90)/media/attribute/swatch\""
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -37,6 +40,7 @@ android {
             buildConfigField "String", "API_BASE_URL", DEFAULT_API_BASE_URL
             buildConfigField "String", "IMAGE_BASE_URL_FOR_LIST", DEFAULT_IMAGE_BASE_URL_FOR_LIST
             buildConfigField "String", "IMAGE_BASE_URL_FOR_DETAIL", DEFAULT_IMAGE_BASE_URL_FOR_DETAIL
+            buildConfigField "String", "IMAGE_BASE_URL_FOR_SWATCH", DEFAULT_IMAGE_BASE_URL_FOR_SWATCH
         }
 
         prodNisnass  {
@@ -45,6 +49,7 @@ android {
             buildConfigField "String", "API_BASE_URL", NISNASS_API_BASE_URL
             buildConfigField "String", "IMAGE_BASE_URL_FOR_LIST", NISNASS_IMAGE_BASE_URL_FOR_LIST
             buildConfigField "String", "IMAGE_BASE_URL_FOR_DETAIL", NISNASS_IMAGE_BASE_URL_FOR_DETAIL
+            buildConfigField "String", "IMAGE_BASE_URL_FOR_SWATCH", NISNASS_IMAGE_BASE_URL_FOR_SWATCH
         }
 
         // more product flavors can be added here for multibrand support

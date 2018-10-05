@@ -151,8 +151,7 @@ class DetailActivity : BaseActivity<DetailView, DetailPresenter>(), DetailView,
             detailImageViewColorCircle.setImageDrawable(ColorDrawable(Color.parseColor(colorHex)))
         } else if (colorMapper.hasImage(product.color.orEmpty())) {
             val image = colorMapper.getImage(product.color.orEmpty()).orEmpty()
-            // FIXME: multicolour images could not be loaded perfectly, because base image url does not work here
-            detailImageViewColorCircle.setImageUrl(ImageUrl.forDetail(image)) {
+            detailImageViewColorCircle.setImageUrl(ImageUrl.forSwatch(image)) {
                 noFade()
             }
         } else {
